@@ -5,4 +5,5 @@ Implémentation de divers schémas numériques temporels (différences finies ce
 - Explicite : Euler, RK 2-4
 - Implicite : Euler
 - Semi-implicite : Crank-Nicolson
+
 Etude de l'erreur spatiale pour tous les schémas (vérification de l'ordre 2 en espace), et temporelle pour les schemas (semi-)implicites (Euler $o(\Delta x)$, Crank-Nicolson $o(\Delta x^2)$). Pas d'étude de l'erreur temporelle pour les schémas explicite, condition de stabilité trop raide.
