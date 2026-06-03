@@ -3,13 +3,16 @@ import matplotlib.pyplot as plt
 
 from Parametres_Discretisation import alpha
 from pathlib import Path
+from PIL import Image
 
 
 
-def Graphique_Simulation(t, Solutions, u_lim, params, pourcentage = 5, zoom_pts = 3, alpha = alpha):
 
+def Graphique_Simulation(t, Solutions, u_lim, params, pourcentage = 5, zoom_pts = 3):
 
-    Dossier = rf"Graphes\alpha={alpha:.2f}"
+    alpha, dx, dt = params
+
+    Dossier = rf"Graphes"
     Path(Dossier).mkdir(parents=True, exist_ok=True)
 
     def limites_u(u_lim, p = pourcentage):
@@ -40,8 +43,7 @@ def Graphique_Simulation(t, Solutions, u_lim, params, pourcentage = 5, zoom_pts 
     fig, ax = plt.subplot_mosaic("112",
                                  figsize=(12, 6), layout="constrained")
     
-    ax0, ax1 = ax["1"], ax["2"]
-    
+    ax0, ax1 = ax["1"], ax["2"]    
 
     for it, ti in enumerate(t):
 
@@ -86,13 +88,15 @@ def Graphique_Simulation(t, Solutions, u_lim, params, pourcentage = 5, zoom_pts 
 
             nx_zoom = x.size // 2
             u_zoom = u[nx_zoom : nx_zoom + zoom_pts]
-            u_lim_zoom = [min(u_zoom), max(u_zoom)]
+            u_lim_zoom = [min(u_zoom) * (1 + 7.5e-3), max(u_zoom) * (1 - 2.5e-3)]
 
             ax1.set_title("Zoom ")
-            ax1.set_xlabel("x")
-            ax1.set_ylabel("u")
-            ax1.set_xlim(x[nx_zoom ], x[nx_zoom + zoom_pts - 1])
-            ax1.set_ylim(limites_u(u_lim_zoom, p = 1e-1))
+            # ax1.set_xlabel("x")
+            # ax1.set_ylabel("u")
+            ax1.set_xlim(x[nx_zoom] + dx * .9, x[nx_zoom + zoom_pts - 1] - dx * .9)
+            ax1.set_ylim(limites_u(u_lim_zoom, p = 7.5e-2))
+            ax1.set_xticks([])
+            ax1.set_yticks([])
             ax1.legend(loc="lower left")
             ax1.grid()
             ax1.set_facecolor("#F5F5F5")
@@ -100,8 +104,6 @@ def Graphique_Simulation(t, Solutions, u_lim, params, pourcentage = 5, zoom_pts 
 
             plt.pause(1e-3)
             plt.savefig(Dossier + rf"\t={ti:.3f}.png")
-
-    plt.show()
 
 
 
@@ -176,4 +178,4 @@ def Graphique_Erreur(Erreurs, Valeurs, alpha = alpha):
     ax1.set_facecolor("#F5F5F5")
 
     plt.show()
-    plt.savefig(Dossier + "\\erreur.png")
+    plt.savefig(rf"\erreur.png")

@@ -13,6 +13,7 @@ from Schemas.Euler_Implicite import Implicite
 from Schemas.Crank_Nicolson import CN
 
 from Graphique import *
+from Graphes.png_to_gif import GIF
 
 
 
@@ -59,11 +60,11 @@ def Simulation():
     # Graphique
     Solutions = {
         "Exact" : {"x" : x_fin, "u" : u_exacte, "linestyle": "-", "color": "black", "linewidth": 5, "marker": ""},
-        "Euler Explicite" : {"x" : x, "u" : u_Euler_Explicite, "linestyle": "--", "color": "blue", "linewidth": 3, "marker": "o"},
+        "Euler Explicite" : {"x" : x, "u" : u_Euler_Explicite, "linestyle": "--", "color": "cyan", "linewidth": 3, "marker": "o"},
         "Runge-Kutta 2" : {"x" : x, "u" : u_RK2, "linestyle": "--", "color": "red", "linewidth": 3, "marker": "d"},
         "Runge-Kutta 4" : {"x" : x, "u" : u_RK4, "linestyle": "--", "color": "green", "linewidth": 3, "marker": "s"},
         "Euler Implicite" : {"x" : x, "u" : u_Euler_Implicite, "linestyle": "-.", "color": "magenta", "linewidth": 3, "marker": "s"},
-        "Crank-Nicolson" : {"x" : x, "u" : u_Crank_Nicolson, "linestyle": ":", "color": "cyan", "linewidth": 3, "marker": "^"},
+        "Crank-Nicolson" : {"x" : x, "u" : u_Crank_Nicolson, "linestyle": ":", "color": "blue", "linewidth": 3, "marker": "^"},
     }
 
     Graphique_Simulation(t, Solutions, [u_min, u_max], params)
@@ -127,11 +128,11 @@ def Erreur():
         Space_Crank_Nicolson[i] = la.norm(u_Crank_Nicolson - u_exacte, np.inf)
     
     Erreurs_Spatiales = {
-        "Euler Explicite" : {"dx" : val_dx, "E" : Space_Euler_Explicite, "linestyle": "--", "color": "blue", "linewidth": 1.5, "marker": "o"},
+        "Euler Explicite" : {"dx" : val_dx, "E" : Space_Euler_Explicite, "linestyle": "--", "color": "cyan", "linewidth": 1.5, "marker": "o"},
         "Runge-Kutta 2" : {"dx" : val_dx, "E" : Space_RK2, "linestyle": "--", "color": "red", "linewidth": 1.5, "marker": "d"},
         "Runge-Kutta 4" : {"dx" : val_dx, "E" : Space_RK4, "linestyle": "--", "color": "green", "linewidth": 1.5, "marker": "s"},
         "Euler Implicite" : {"dx" : val_dx, "E" : Space_Euler_Implicite, "linestyle": "-.", "color": "magenta", "linewidth": 1.5, "marker": "s"},
-        "Crank-Nicolson" : {"dx" : val_dx, "E" : Space_Crank_Nicolson, "linestyle": ":", "color": "lightblue", "linewidth": 1.5, "marker": "^"},
+        "Crank-Nicolson" : {"dx" : val_dx, "E" : Space_Crank_Nicolson, "linestyle": ":", "color": "blue", "linewidth": 1.5, "marker": "^"},
     }
 
 
@@ -162,7 +163,7 @@ def Erreur():
 
     Erreurs_Temporelles = {
         "Euler Implicite" : {"dt" : val_dt, "E" : Temporal_Euler_Implicite, "linestyle": "-.", "color": "magenta", "linewidth": 1.5, "marker": "s"},
-        "Crank-Nicolson" : {"dt" : val_dt, "E" : Temporal_Crank_Nicolson, "linestyle": ":", "color": "lightblue", "linewidth": 1.5, "marker": "^"},
+        "Crank-Nicolson" : {"dt" : val_dt, "E" : Temporal_Crank_Nicolson, "linestyle": ":", "color": "blue", "linewidth": 1.5, "marker": "^"},
     }
     
     Graphique_Erreur((Erreurs_Spatiales, Erreurs_Temporelles), (val_dx, val_dt))
@@ -180,6 +181,7 @@ if __name__ == "__main__":
 
     print("\n\t=== Simulation ===\n")
     Simulation()
+    GIF()
     print("\n\t=== Fin simulation ===\n\n")
 
 
