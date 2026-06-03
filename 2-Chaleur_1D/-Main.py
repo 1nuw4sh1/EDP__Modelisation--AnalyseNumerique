@@ -4,13 +4,13 @@ from Fonction_Test import *
 from Parametres_Discretisation import *
 
 # Schemas Explicites
-from Schemas.Explicite.Euler import Explicite
-from Schemas.Explicite.Runge_Kutta_2 import RK2
-from Schemas.Explicite.Runge_Kutta_4 import RK4
+from Schemas.Euler_Explicite import Explicite
+from Schemas.Runge_Kutta_2 import RK2
+from Schemas.Runge_Kutta_4 import RK4
 
 # Schemas (semi) Implicites
-from Schemas.Implicite.Euler import Implicite
-from Schemas.Implicite.Crank_Nicolson import CN
+from Schemas.Euler_Implicite import Implicite
+from Schemas.Crank_Nicolson import CN
 
 from Graphique import *
 
