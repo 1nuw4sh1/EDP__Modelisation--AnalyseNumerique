@@ -113,7 +113,7 @@ def Graphique_Simulation(t, Solutions, u_lim, params, pourcentage = 5, zoom_pts 
 
 def Graphique_Erreur(Erreurs, Valeurs, alpha = alpha):
 
-    Dossier = rf"Graphes\alpha={alpha:.2f}"
+    Dossier = rf"Graphes"
     Path(Dossier).mkdir(parents=True, exist_ok=True)
 
     val_dx, val_dt = Valeurs
@@ -177,5 +177,5 @@ def Graphique_Erreur(Erreurs, Valeurs, alpha = alpha):
     ax1.grid()
     ax1.set_facecolor("#F5F5F5")
 
+    plt.savefig(Dossier + rf"\erreur.png")
     plt.show()
-    plt.savefig(rf"\erreur.png")
